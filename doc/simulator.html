@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module simulator</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module simulator</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>The module provides facilities for simulating algorithms and systems
+  with a fixed overlay topology.
+
+<p><b>Authors:</b> <a href="mailto:peressotti@imada.sdu.dk"><tt>peressotti@imada.sdu.dk</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2>The module provides facilities for simulating algorithms and systems
+  with a fixed overlay topology.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-behaviour">behaviour()</a></h3>
+<p><tt>behaviour(X) = fun((X, [X], [{X, pid()}]) -&gt; any())</tt></p>
+<p>  A function to be evaluated at each vertex in the simulation. The function
+  takes the vertex it is evaluating the function, the list of its neighbours,
+  and a list of vertices and their corresponding pid.</p>
+
+<h3 class="typedecl"><a name="type-graph">graph()</a></h3>
+<p><tt>graph(X) = <a href="simulator_util.html#type-graph">simulator_util:graph</a>(X)</tt></p>
+<p>  A directed graph given as adjacency map. The adjacency map is a
+  list of pairs where the first component represents the vertex (e.g. an
+  integer) and the second component is the list of vertices in its
+  neighbourhood.</p>
+
+<h3 class="typedecl"><a name="type-simulation">simulation()</a></h3>
+<p><b>abstract datatype</b>: <tt>simulation(_X)</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#kill-2">kill/2</a></td><td>Termiantes the process associated to the given vertex.</td></tr>
+<tr><td valign="top"><a href="#pid_of-2">pid_of/2</a></td><td>returns the process associated to the given vertex.</td></tr>
+<tr><td valign="top"><a href="#start-2">start/2</a></td><td>Starts a simulation over the given graph with a process of each vertex.</td></tr>
+<tr><td valign="top"><a href="#start-3">start/3</a></td><td>Starts a simulation over the given graph with a process of each vertex.</td></tr>
+<tr><td valign="top"><a href="#start_complete-2">start_complete/2</a></td><td>Starts a simulation over a complete graph.</td></tr>
+<tr><td valign="top"><a href="#start_complete-3">start_complete/3</a></td><td>Starts a simulation over a complete graph.</td></tr>
+<tr><td valign="top"><a href="#start_ring-2">start_ring/2</a></td><td>Starts a simulation over a ring.</td></tr>
+<tr><td valign="top"><a href="#start_ring-3">start_ring/3</a></td><td>Starts a simulation over a ring.</td></tr>
+<tr><td valign="top"><a href="#stop-1">stop/1</a></td><td>Stops the simulation.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="kill-2">kill/2</a></h3>
+<div class="spec">
+<p><tt>kill(X, S::<a href="#type-simulation">simulation</a>(X)) -&gt; ok</tt><br></p>
+<p> </p>
+</div><p>Termiantes the process associated to the given vertex.</p>
+
+<h3 class="function"><a name="pid_of-2">pid_of/2</a></h3>
+<div class="spec">
+<p><tt>pid_of(X, S::<a href="#type-simulation">simulation</a>(X)) -&gt; {ok, pid()} | {error, term()}</tt><br></p>
+<p> </p>
+</div><p>returns the process associated to the given vertex.</p>
+
+<h3 class="function"><a name="start-2">start/2</a></h3>
+<div class="spec">
+<p><tt>start(G::<a href="#type-graph">graph</a>(X), B::<a href="#type-behaviour">behaviour</a>(X)) -&gt; <a href="#type-simulation">simulation</a>(X)</tt><br></p>
+<p><tt>G</tt>: is a directed graph.<br>
+<tt>B</tt>: is function to be evaluated at each vertex.<br>
+</p>
+</div><p>Starts a simulation over the given graph with a process of each vertex.
+    Processes are connected according to the graph and each evaluates the given
+    function.</p>
+
+<h3 class="function"><a name="start-3">start/3</a></h3>
+<div class="spec">
+<p><tt>start(G::<a href="#type-graph">graph</a>(X), M::module(), B::atom()) -&gt; <a href="#type-simulation">simulation</a>(X)</tt><br></p>
+<p><tt>G</tt>: is a directed graph.<br>
+<tt>M</tt>: is a module.<br>
+<tt>B</tt>: is a function in M to be evaluated at each vertex.<br>
+</p>
+</div><p>Starts a simulation over the given graph with a process of each vertex.
+    Processes are connected according to the graph and each evaluates the given
+    function.</p>
+
+<h3 class="function"><a name="start_complete-2">start_complete/2</a></h3>
+<div class="spec">
+<p><tt>start_complete(N::integer(), B::<a href="#type-behaviour">behaviour</a>(integer())) -&gt; <a href="#type-simulation">simulation</a>(integer())</tt><br></p>
+<p><tt>N</tt>: the number of vertices in the graph.<br>
+</p>
+</div><p>Starts a simulation over a complete graph</p>
+<p><b>See also:</b> <a href="#start-2">start/2</a>.</p>
+
+<h3 class="function"><a name="start_complete-3">start_complete/3</a></h3>
+<div class="spec">
+<p><tt>start_complete(N::integer(), M::module(), B::atom()) -&gt; <a href="#type-simulation">simulation</a>(integer())</tt><br></p>
+<p><tt>N</tt>: the number of vertices in the graph.<br>
+</p>
+</div><p>Starts a simulation over a complete graph</p>
+<p><b>See also:</b> <a href="#start-3">start/3</a>.</p>
+
+<h3 class="function"><a name="start_ring-2">start_ring/2</a></h3>
+<div class="spec">
+<p><tt>start_ring(N::integer(), B::<a href="#type-behaviour">behaviour</a>(integer())) -&gt; <a href="#type-simulation">simulation</a>(integer())</tt><br></p>
+<p><tt>N</tt>: the number of vertices in the graph.<br>
+</p>
+</div><p>Starts a simulation over a ring</p>
+<p><b>See also:</b> <a href="#start-2">start/2</a>.</p>
+
+<h3 class="function"><a name="start_ring-3">start_ring/3</a></h3>
+<div class="spec">
+<p><tt>start_ring(N::integer(), M::module(), B::atom()) -&gt; <a href="#type-simulation">simulation</a>(integer())</tt><br></p>
+<p><tt>N</tt>: the number of vertices in the graph.<br>
+</p>
+</div><p>Starts a simulation over a ring</p>
+<p><b>See also:</b> <a href="#start-3">start/3</a>.</p>
+
+<h3 class="function"><a name="stop-1">stop/1</a></h3>
+<div class="spec">
+<p><tt>stop(S::<a href="#type-simulation">simulation</a>(term())) -&gt; ok</tt><br></p>
+<p> </p>
+</div><p>Stops the simulation.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

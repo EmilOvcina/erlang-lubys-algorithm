@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module simulator_util</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module simulator_util</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>The module provides functions for creating graphs that represent
+  common types of overlay topologies.
+
+<p><b>Authors:</b> <a href="mailto:peressotti@imada.sdu.dk"><tt>peressotti@imada.sdu.dk</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2>The module provides functions for creating graphs that represent
+  common types of overlay topologies. Graphs are directed and represented
+  using adjacency lists.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-file_error">file_error()</a></h3>
+<p><tt>file_error() = <a href="http://www.erlang.org/edoc/doc/kernel/doc/file.html#type-posix">file:posix()</a> | badarg | terminated | system_limit</tt></p>
+
+
+<h3 class="typedecl"><a name="type-graph">graph()</a></h3>
+<p><tt>graph(V) = [{V, [V]}]</tt></p>
+<p>  A directed graph given as adjacency map. The adjacency map is a
+  list of pairs where the first component represents the vertex (e.g. an
+  integer) and the second component is the list of vertices in its
+  neighbourhood.</p>
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#complete_biparted-2">complete_biparted/2</a></td><td>Creates a complete biparted directed graph with vertices
+  [{a,1},...,{a,Na},{b,1},...,{b,Nb}].</td></tr>
+<tr><td valign="top"><a href="#complete_graph-1">complete_graph/1</a></td><td>Creates a complete directed graph with vertices [1,...,N].</td></tr>
+<tr><td valign="top"><a href="#grid-2">grid/2</a></td><td>Creates a N by M grid with vertices [{1,1},...,{N,M}].</td></tr>
+<tr><td valign="top"><a href="#read_from_file-1">read_from_file/1</a></td><td>Reads an term represenging a graph from Filename.</td></tr>
+<tr><td valign="top"><a href="#ring-1">ring/1</a></td><td>Creates a directed ring with vertices [1,...,N].</td></tr>
+<tr><td valign="top"><a href="#toroidal_grid-2">toroidal_grid/2</a></td><td>Creates a N by M toroidal grid with vertices [{1,1},...,{N,M}].</td></tr>
+<tr><td valign="top"><a href="#uring-1">uring/1</a></td><td>Creates an undirected ring with vertices [1,...,N].</td></tr>
+<tr><td valign="top"><a href="#write_to_file-2">write_to_file/2</a></td><td>Writes the graph G to Filename formatted as an Erlang term.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="complete_biparted-2">complete_biparted/2</a></h3>
+<div class="spec">
+<p><tt>complete_biparted(Na::integer(), Nb::integer()) -&gt; <a href="#type-graph">graph</a>({a | b, integer()})</tt><br></p>
+<p><tt>Na</tt>: number of 'a'-vertices<br>
+<tt>Nb</tt>: number of 'b'-vertices<br>
+</p>
+</div><p>Creates a complete biparted directed graph with vertices
+  [{a,1},...,{a,Na},{b,1},...,{b,Nb}].</p>
+
+<h3 class="function"><a name="complete_graph-1">complete_graph/1</a></h3>
+<div class="spec">
+<p><tt>complete_graph(N::integer()) -&gt; <a href="#type-graph">graph</a>(integer())</tt><br></p>
+<p> </p>
+</div><p>Creates a complete directed graph with vertices [1,...,N].</p>
+
+<h3 class="function"><a name="grid-2">grid/2</a></h3>
+<div class="spec">
+<p><tt>grid(N::integer(), M::integer()) -&gt; <a href="#type-graph">graph</a>({integer(), integer()})</tt><br></p>
+<p> </p>
+</div><p>Creates a N by M grid with vertices [{1,1},...,{N,M}].</p>
+
+<h3 class="function"><a name="read_from_file-1">read_from_file/1</a></h3>
+<div class="spec">
+<p><tt>read_from_file(Filename::<a href="http://www.erlang.org/edoc/doc/kernel/doc/file.html#type-name_all">file:name_all()</a>) -&gt; {ok, <a href="#type-graph">graph</a>(term())} | {error, <a href="#type-file_error">file_error()</a>}</tt><br></p>
+<p> </p>
+</div><p>Reads an term represenging a graph from Filename.</p>
+
+<h3 class="function"><a name="ring-1">ring/1</a></h3>
+<div class="spec">
+<p><tt>ring(N::integer()) -&gt; <a href="#type-graph">graph</a>(integer())</tt><br></p>
+<p> </p>
+</div><p>Creates a directed ring with vertices [1,...,N].</p>
+
+<h3 class="function"><a name="toroidal_grid-2">toroidal_grid/2</a></h3>
+<div class="spec">
+<p><tt>toroidal_grid(N::integer(), M::integer()) -&gt; <a href="#type-graph">graph</a>({integer(), integer()})</tt><br></p>
+<p> </p>
+</div><p>Creates a N by M toroidal grid with vertices [{1,1},...,{N,M}].</p>
+
+<h3 class="function"><a name="uring-1">uring/1</a></h3>
+<div class="spec">
+<p><tt>uring(N::integer()) -&gt; <a href="#type-graph">graph</a>(integer())</tt><br></p>
+<p> </p>
+</div><p>Creates an undirected ring with vertices [1,...,N].</p>
+
+<h3 class="function"><a name="write_to_file-2">write_to_file/2</a></h3>
+<div class="spec">
+<p><tt>write_to_file(Filename::<a href="http://www.erlang.org/edoc/doc/kernel/doc/file.html#type-name_all">file:name_all()</a>, G::<a href="#type-graph">graph</a>(term())) -&gt; ok | {error, <a href="#type-file_error">file_error()</a>}</tt><br></p>
+<p> </p>
+</div><p>Writes the graph G to Filename formatted as an Erlang term.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>
